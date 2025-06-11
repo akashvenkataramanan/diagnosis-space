@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function Legend() {
   const legendItems = [
     {

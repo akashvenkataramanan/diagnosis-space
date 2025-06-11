@@ -1,4 +1,3 @@
-import React from 'react';
 import { NoteInput } from './components/NoteInput';
 import { GraphBoard } from './components/GraphBoard';
 import { Legend } from './components/Legend';

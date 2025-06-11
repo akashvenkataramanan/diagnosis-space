@@ -1,9 +1,19 @@
-import React from 'react';
-import { Handle, Position, NodeProps } from '@xyflow/react';
-import { DiagnosisNodeData } from '../../types';
+import { Handle, Position } from '@xyflow/react';
 import clsx from 'clsx';
 
-export function DiagnosisNode({ data }: NodeProps<DiagnosisNodeData>) {
+interface NodeData {
+  label: string;
+  type: string;
+  details?: string;
+  confidence?: number;
+  evidence?: string[];
+}
+
+interface NodeProps {
+  data: NodeData;
+}
+
+export function DiagnosisNode({ data }: NodeProps) {
   const getNodeStyle = (type: string) => {
     switch (type) {
       case 'diagnosis':

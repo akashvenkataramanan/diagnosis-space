@@ -1,13 +1,28 @@
 import { create } from 'zustand';
-import { DiagnosisState, DiagnosisNode, DiagnosisEdge } from '../types';
+import type { Node, Edge } from '@xyflow/react';
+
+interface DiagnosisState {
+  note: string;
+  graph: {
+    nodes: Node[];
+    edges: Edge[];
+  };
+  isLoading: boolean;
+  error: string | null;
+  setNote: (note: string) => void;
+  setGraph: (graph: { nodes: Node[]; edges: Edge[] }) => void;
+  setLoading: (loading: boolean) => void;
+  setError: (error: string | null) => void;
+  analyzeNote: (note: string) => Promise<void>;
+}
 
 // Mock API call for now - will be replaced with real backend
-const mockAnalyzeNote = async (note: string): Promise<{ nodes: DiagnosisNode[]; edges: DiagnosisEdge[] }> => {
+const mockAnalyzeNote = async (_note: string): Promise<{ nodes: Node[]; edges: Edge[] }> => {
   // Simulate API delay
   await new Promise(resolve => setTimeout(resolve, 1500));
   
   // Mock response based on common medical scenarios
-  const mockNodes: DiagnosisNode[] = [
+  const mockNodes: Node[] = [
     {
       id: 'chf',
       type: 'default',
@@ -62,27 +77,24 @@ const mockAnalyzeNote = async (note: string): Promise<{ nodes: DiagnosisNode[]; 
     }
   ];
 
-  const mockEdges: DiagnosisEdge[] = [
+  const mockEdges: Edge[] = [
     {
       id: 'e1',
       source: 'chf',
       target: 'bnp',
-      label: 'next-step',
-      type: 'next-step'
+      label: 'next-step'
     },
     {
       id: 'e2',
       source: 'chf',
       target: 'echo',
-      label: 'next-step',
-      type: 'next-step'
+      label: 'next-step'
     },
     {
       id: 'e3',
       source: 'pneumonia',
       target: 'cxr',
-      label: 'next-step',
-      type: 'next-step'
+      label: 'next-step'
     }
   ];
 

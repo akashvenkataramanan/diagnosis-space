@@ -1,8 +1,8 @@
-import { Node, Edge } from '@xyflow/react';
+import type { Node, Edge } from '@xyflow/react';
 
 export type NodeType = 'diagnosis' | 'differential' | 'action' | 'completed';
 
-export interface DiagnosisNodeData {
+export interface DiagnosisNodeData extends Record<string, unknown> {
   label: string;
   type: NodeType;
   details?: string;
@@ -10,7 +10,7 @@ export interface DiagnosisNodeData {
   evidence?: string[];
 }
 
-export interface DiagnosisNode extends Node {
+export interface DiagnosisNode extends Node<DiagnosisNodeData> {
   data: DiagnosisNodeData;
 }
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import {
   ReactFlow,
   Background,
@@ -7,13 +7,11 @@ import {
   useNodesState,
   useEdgesState,
   addEdge,
-  Connection,
-  Edge,
   BackgroundVariant,
 } from '@xyflow/react';
+import type { Connection } from '@xyflow/react';
 import { useDiagStore } from '../store/diagStore';
 import { DiagnosisNode } from './nodes/DiagnosisNode';
-import { getLayoutedElements } from '../utils/layout';
 
 const nodeTypes = {
   default: DiagnosisNode,
@@ -21,18 +19,14 @@ const nodeTypes = {
 
 export function GraphBoard() {
   const { graph } = useDiagStore();
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [nodes, setNodes, onNodesChange] = useNodesState(graph.nodes || []);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(graph.edges || []);
 
   // Update nodes and edges when graph data changes
   useEffect(() => {
     if (graph.nodes.length > 0) {
-      const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-        graph.nodes,
-        graph.edges
-      );
-      setNodes(layoutedNodes);
-      setEdges(layoutedEdges);
+      setNodes(graph.nodes);
+      setEdges(graph.edges);
     } else {
       setNodes([]);
       setEdges([]);
@@ -41,12 +35,6 @@ export function GraphBoard() {
 
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges]
-  );
-
-  const onEdgeUpdate = useCallback(
-    (oldEdge: Edge, newConnection: Connection) =>
-      setEdges((els) => els.map((el) => (el.id === oldEdge.id ? { ...el, ...newConnection } : el))),
     [setEdges]
   );
 
@@ -76,10 +64,8 @@ export function GraphBoard() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        onEdgeUpdate={onEdgeUpdate}
         nodeTypes={nodeTypes}
         fitView
-        attributionPosition="top-right"
         className="bg-gray-50"
       >
         <Background 
@@ -90,13 +76,10 @@ export function GraphBoard() {
         />
         <Controls 
           position="top-left"
-          className="bg-white shadow-lg rounded-lg"
         />
         <MiniMap 
           position="bottom-right"
           nodeStrokeWidth={3}
-          className="bg-white shadow-lg rounded-lg"
-          maskColor="rgba(0, 0, 0, 0.1)"
         />
       </ReactFlow>
     </div>
