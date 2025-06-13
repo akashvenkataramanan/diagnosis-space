@@ -1,4 +1,7 @@
-import type { Node, Edge } from '@xyflow/react';
+export type NodePosition = {
+  x: number;
+  y: number;
+};
 
 export type NodeType = 'diagnosis' | 'differential' | 'action' | 'completed';
 
@@ -11,11 +14,16 @@ export interface DiagnosisNodeData extends Record<string, unknown> {
   priority?: 'urgent' | 'high' | 'medium' | 'low';
 }
 
-export interface DiagnosisNode extends Node<DiagnosisNodeData> {
+export interface DiagnosisNode {
+  id: string;
+  position: NodePosition;
   data: DiagnosisNodeData;
 }
 
-export interface DiagnosisEdge extends Edge {
+export interface DiagnosisEdge {
+  id: string;
+  source: string;
+  target: string;
   label?: string;
   type?: 'next-step' | 'supports' | 'excludes' | 'related';
 }
