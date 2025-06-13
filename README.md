@@ -38,7 +38,7 @@ A cutting-edge web application that combines OpenAI's O3 reasoning model with in
 
 - **Frontend**: React 18 + TypeScript + Vite
 - **Styling**: Tailwind CSS with Claude's design system
-- **Visualization**: React Flow for interactive diagrams
+- **Visualization**: Cytoscape.js for interactive diagrams
 - **State Management**: Zustand with persistence
 - **AI Integration**: OpenAI O3 API with function calling
 - **Build Tools**: Vite + ESLint + PostCSS
@@ -106,7 +106,7 @@ Physical Examination:
 src/
 ├── components/           # React components
 │   ├── ApiKeyInput.tsx   # Secure API key management
-│   ├── GraphBoard.tsx    # React Flow visualization
+│   ├── GraphBoard.tsx    # Cytoscape visualization
 │   ├── Legend.tsx        # Workflow guide
 │   ├── NoteInput.tsx     # Clinical note input
 │   └── nodes/
@@ -125,7 +125,7 @@ src/
 1. **User Input** → Clinical note entered
 2. **AI Processing** → OpenAI O3 analyzes content
 3. **Data Transformation** → Structured medical workflow
-4. **Visualization** → Interactive React Flow diagram
+4. **Visualization** → Interactive Cytoscape diagram
 5. **User Interaction** → Explore and analyze results
 
 ## 🔧 Development
@@ -210,7 +210,7 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE) file for 
 
 - **OpenAI**: For the powerful O3 reasoning model
 - **Anthropic**: For Claude's design inspiration and AI assistance
-- **React Flow**: For the excellent visualization framework
+- **Cytoscape.js**: For the excellent visualization framework
 - **Tailwind CSS**: For the utility-first styling system
 - **Medical Community**: For insights into clinical workflow needs
 
