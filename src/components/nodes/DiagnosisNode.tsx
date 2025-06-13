@@ -28,11 +28,16 @@ export function DiagnosisNode({ data }: NodeProps) {
         return clsx(baseClasses, 'bg-orange-50 border-4 border-orange-400 rounded-lg p-4 shadow-xl hover:shadow-2xl transition-all duration-200 hover:border-orange-500');
       case 'differential':
         return clsx(baseClasses, 'bg-blue-50 border-4 border-blue-400 rounded-lg p-4 shadow-xl hover:shadow-2xl transition-all duration-200 hover:border-blue-500');
-      case 'action':
+      case 'action': {
         const priorityClass = priority === 'urgent' ? 'bg-red-50 border-red-500 hover:border-red-600' :
                             priority === 'high' ? 'bg-amber-50 border-amber-500 hover:border-amber-600' :
                             'bg-green-50 border-green-500 hover:border-green-600';
-        return clsx(baseClasses, 'rounded-lg p-4 shadow-xl hover:shadow-2xl transition-all duration-200 border-4', priorityClass);
+        return clsx(
+          baseClasses,
+          'rounded-lg p-4 shadow-xl hover:shadow-2xl transition-all duration-200 border-4',
+          priorityClass
+        );
+      }
       case 'completed':
         return clsx(baseClasses, 'bg-gray-50 border-4 border-gray-400 rounded-lg p-4 shadow-xl opacity-75');
       default:

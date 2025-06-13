@@ -1,73 +1,81 @@
-import { useCallback, useEffect } from 'react';
-import {
-  ReactFlow,
-  Background,
-  Controls,
-  MiniMap,
-  useNodesState,
-  useEdgesState,
-  addEdge,
-  BackgroundVariant,
-} from '@xyflow/react';
-import type { Connection } from '@xyflow/react';
+import { useEffect, useRef } from 'react';
+import { Network } from 'vis-network/peer';
+import 'vis-network/styles/vis-network.css';
 import { useDiagStore } from '../store/diagStore';
-import { DiagnosisNode } from './nodes/DiagnosisNode';
-
-const nodeTypes = {
-  default: DiagnosisNode,
-};
 
 export function GraphBoard() {
   const { graph } = useDiagStore();
-  const [nodes, setNodes, onNodesChange] = useNodesState(graph.nodes || []);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(graph.edges || []);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const networkRef = useRef<Network | null>(null);
 
-  // Update nodes and edges when graph data changes
-  useEffect(() => {
-    if (graph.nodes.length > 0) {
-      setNodes(graph.nodes);
-      setEdges(graph.edges);
-    } else {
-      setNodes([]);
-      setEdges([]);
-    }
-  }, [graph, setNodes, setEdges]);
-
-  const onConnect = useCallback(
-    (params: Connection) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges]
-  );
-
-  // Add test nodes if no graph data
-  const testNodes = graph.nodes.length === 0 ? [
+  const testNodes = [
     {
       id: 'test-1',
-      type: 'default',
       position: { x: 100, y: 100 },
-      data: { 
-        label: 'Test Node 1', 
+      data: {
+        label: 'Test Node 1',
         type: 'diagnosis' as const,
         confidence: 0.9,
-        details: 'This is a test node'
-      }
+        details: 'This is a test node',
+      },
     },
     {
-      id: 'test-2', 
-      type: 'default',
+      id: 'test-2',
       position: { x: 400, y: 100 },
-      data: { 
-        label: 'Test Node 2', 
+      data: {
+        label: 'Test Node 2',
         type: 'action' as const,
         priority: 'high' as const,
-        details: 'This is another test node'
-      }
-    }
-  ] : [];
+        details: 'This is another test node',
+      },
+    },
+  ];
 
-  const displayNodes = graph.nodes.length > 0 ? nodes : testNodes;
-  
-  // Show empty state message but still render React Flow with test nodes
   const showEmptyMessage = graph.nodes.length === 0;
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const displayNodes = (graph.nodes.length > 0 ? graph.nodes : testNodes).map((n) => ({
+      id: n.id,
+      label: n.data.label,
+      group: n.data.type,
+      title: n.data.details,
+      x: n.position?.x,
+      y: n.position?.y,
+    }));
+
+    const displayEdges = (graph.nodes.length > 0 ? graph.edges : []).map((e) => ({
+      id: e.id,
+      from: e.source,
+      to: e.target,
+      label: e.label,
+      arrows: 'to',
+    }));
+
+    const data = { nodes: displayNodes, edges: displayEdges };
+    const options = {
+      nodes: {
+        shape: 'box',
+        margin: 10,
+        font: { size: 14 },
+      },
+      layout: { improvedLayout: true },
+      physics: { stabilization: true },
+      edges: { arrows: { to: { enabled: true } } },
+    };
+
+    if (networkRef.current) {
+      networkRef.current.setData(data);
+    } else {
+      networkRef.current = new Network(containerRef.current, data, options);
+    }
+
+    return () => {
+      networkRef.current?.destroy();
+      networkRef.current = null;
+    };
+  }, [graph]);
 
   return (
     <div className="flex-1 bg-gray-50" style={{ height: '80vh', width: '100%' }}>
@@ -75,56 +83,14 @@ export function GraphBoard() {
         <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
           <div className="bg-white/90 rounded-lg p-6 text-center shadow-lg">
             <div className="text-4xl mb-3">🩺</div>
-            <h3 className="text-lg font-semibold text-gray-700 mb-2">
-              Ready to Analyze
-            </h3>
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">Ready to Analyze</h3>
             <p className="text-gray-500 text-sm max-w-sm">
               Enter a clinical note above to generate a diagnosis workflow. Test nodes are visible below.
             </p>
           </div>
         </div>
       )}
-      <ReactFlow
-        nodes={displayNodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
-        nodeTypes={nodeTypes}
-        fitView
-        fitViewOptions={{
-          padding: 0.2,
-          maxZoom: 1.2,
-          minZoom: 0.3
-        }}
-        minZoom={0.1}
-        maxZoom={2}
-        defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
-        className="bg-gray-50"
-      >
-        <Background 
-          variant={BackgroundVariant.Dots} 
-          gap={16} 
-          size={1} 
-          color="#d1d5db"
-        />
-        <Controls 
-          position="top-left"
-          showFitView
-          showZoom
-          showInteractive
-        />
-        <MiniMap 
-          position="bottom-right"
-          nodeStrokeWidth={2}
-          pannable
-          zoomable
-          style={{
-            backgroundColor: 'white',
-            border: '1px solid #d1d5db'
-          }}
-        />
-      </ReactFlow>
+      <div ref={containerRef} style={{ height: '100%' }} />
     </div>
   );
 }
