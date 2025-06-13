@@ -20,8 +20,6 @@ interface NodeProps {
 export function DiagnosisNode({ data }: NodeProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   
-  console.log('DiagnosisNode rendering:', data.label, data.type);
-  
   const getNodeStyle = (type: string, priority?: string) => {
     const baseClasses = 'relative group min-w-80 max-w-96 cursor-pointer';
     

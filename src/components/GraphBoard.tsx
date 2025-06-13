@@ -25,7 +25,6 @@ export function GraphBoard() {
   // Update nodes and edges when graph data changes
   useEffect(() => {
     if (graph.nodes.length > 0) {
-      console.log('Graph nodes:', graph.nodes.length, graph.nodes);
       setNodes(graph.nodes);
       setEdges(graph.edges);
     } else {
