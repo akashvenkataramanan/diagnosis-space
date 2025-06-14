@@ -53,32 +53,32 @@ export function Legend() {
   return (
     <div className="space-y-4">
       {/* Main Legend Card */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
+      <div className="bg-[#242933] rounded-lg shadow-sm border border-gray-700 p-5">
         <div className="flex items-center gap-3 mb-5">
           <div className="w-6 h-6 bg-orange-500 rounded-md flex items-center justify-center">
             <span className="text-white text-xs font-bold">🧾</span>
           </div>
-          <h3 className="text-lg font-semibold text-gray-900">
+          <h3 className="text-lg font-semibold text-gray-100">
             Clinical Workflow Guide
           </h3>
         </div>
         
         {/* Node Types */}
         <div className="space-y-3 mb-5">
-          <h4 className="text-sm font-medium text-gray-700 flex items-center gap-2">
+          <h4 className="text-sm font-medium text-gray-300 flex items-center gap-2">
             <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
             Node Classifications
           </h4>
           {legendItems.map((item, index) => (
-            <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors duration-200">
+            <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-[#272b33] hover:bg-[#2e3138] transition-colors duration-200">
               <div className={`bg-gradient-to-br ${item.color} text-white rounded-lg p-2 flex items-center justify-center shadow-sm`}>
                 <span className="text-sm">{item.icon}</span>
               </div>
               <div className="flex-1">
-                <div className="font-medium text-sm text-gray-900">
+                <div className="font-medium text-sm text-gray-100">
                   {item.label}
                 </div>
-                <div className="text-xs text-gray-600 mt-1 leading-relaxed">
+                <div className="text-xs text-gray-400 mt-1 leading-relaxed">
                   {item.description}
                 </div>
               </div>
@@ -87,17 +87,17 @@ export function Legend() {
         </div>
 
         {/* Interactive Features */}
-        <div className="mb-5 pt-4 border-t border-gray-200">
-          <h4 className="text-sm font-medium text-gray-700 mb-3 flex items-center gap-2">
+        <div className="mb-5 pt-4 border-t border-gray-700">
+          <h4 className="text-sm font-medium text-gray-300 mb-3 flex items-center gap-2">
             <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
             Interactive Features
           </h4>
           <div className="space-y-2">
             {workflowLayout.map((item, index) => (
-              <div key={index} className="bg-orange-50 p-3 rounded-lg border border-orange-200">
-                <div className="font-medium text-sm text-gray-900">{item.title}</div>
-                <div className="text-xs text-gray-600 mt-1">
-                  <span className="font-medium text-orange-600">{item.position}</span> - {item.description}
+              <div key={index} className="bg-[#272b33] p-3 rounded-lg border border-orange-700">
+                <div className="font-medium text-sm text-gray-100">{item.title}</div>
+                <div className="text-xs text-gray-400 mt-1">
+                  <span className="font-medium text-orange-400">{item.position}</span> - {item.description}
                 </div>
               </div>
             ))}
@@ -105,8 +105,8 @@ export function Legend() {
         </div>
         
         {/* AI Capabilities */}
-        <div className="pt-4 border-t border-gray-200">
-          <div className="bg-gray-900 rounded-lg p-4 text-white">
+        <div className="pt-4 border-t border-gray-700">
+          <div className="bg-[#272b33] rounded-lg p-4 text-gray-100">
             <div className="flex items-center gap-2 mb-3">
               <span className="text-base">✨</span>
               <span className="font-semibold text-sm">OpenAI O3 Reasoning Engine</span>
@@ -134,12 +134,12 @@ export function Legend() {
       </div>
 
       {/* Quick Tips Card */}
-      <div className="bg-orange-50 rounded-lg p-4 border border-orange-200">
+      <div className="bg-[#272b33] rounded-lg p-4 border border-orange-700">
         <div className="flex items-center gap-2 mb-2">
           <span className="text-base">💡</span>
-          <span className="font-medium text-orange-800 text-sm">Quick Tips</span>
+          <span className="font-medium text-orange-400 text-sm">Quick Tips</span>
         </div>
-        <ul className="space-y-1 text-xs text-orange-700">
+        <ul className="space-y-1 text-xs text-orange-300">
           <li>• Click any node to expand details</li>
           <li>• Use mouse wheel to zoom in/out</li>
           <li>• Drag to pan around the diagram</li>

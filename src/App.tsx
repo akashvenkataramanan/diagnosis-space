@@ -4,9 +4,9 @@ import { Legend } from './components/Legend';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#1e1e2e] text-gray-100">
       {/* Header - True Claude-style */}
-      <header className="bg-white border-b border-gray-200 shadow-sm">
+      <header className="bg-[#272b33] border-b border-gray-700 shadow-sm">
         <div className="max-w-full mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -16,10 +16,10 @@ function App() {
                 </div>
               </div>
               <div>
-                <h1 className="text-xl font-semibold text-gray-900">
+                <h1 className="text-xl font-semibold text-gray-100">
                   Diagnosis-Space AI
                 </h1>
-                <p className="text-gray-500 text-sm">
+                <p className="text-gray-400 text-sm">
                   Clinical Reasoning Platform
                 </p>
               </div>
@@ -29,8 +29,8 @@ function App() {
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                 <span className="text-green-700 text-sm font-medium">AI Ready</span>
               </div>
-              <div className="text-gray-500 text-sm">
-                Powered by <span className="text-orange-500 font-medium">OpenAI O3</span>
+              <div className="text-gray-400 text-sm">
+                Powered by <span className="text-orange-400 font-medium">OpenAI O3</span>
               </div>
             </div>
           </div>
@@ -40,7 +40,7 @@ function App() {
       {/* Main Content Area */}
       <div className="flex min-h-[calc(100vh-73px)]">
         {/* Left Sidebar - Legend */}
-        <aside className="w-96 bg-gray-50 border-r border-gray-200 flex-shrink-0">
+        <aside className="w-96 bg-[#242933] border-r border-gray-700 flex-shrink-0">
           <div className="h-full overflow-y-auto p-6">
             <Legend />
           </div>
@@ -49,24 +49,24 @@ function App() {
         {/* Main Content */}
         <main className="flex-1 flex flex-col min-w-0">
           {/* Input Section */}
-          <div className="bg-white border-b border-gray-200">
+          <div className="bg-[#272b33] border-b border-gray-700">
             <div className="p-6">
               <NoteInput />
             </div>
           </div>
 
           {/* Graph Visualization */}
-          <div className="flex-1 relative bg-gray-50">
+          <div className="flex-1 relative bg-[#1e1e2e]">
             <div className="absolute inset-0">
               <GraphBoard />
             </div>
             
             {/* Floating Performance Indicator */}
             <div className="absolute top-4 right-4 z-10">
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 px-3 py-2">
+              <div className="bg-[#272b33] rounded-lg shadow-sm border border-gray-700 px-3 py-2 text-gray-100">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
-                  <span className="text-gray-700 text-sm font-medium">Live Analysis</span>
+                  <span className="text-gray-300 text-sm font-medium">Live Analysis</span>
                 </div>
               </div>
             </div>
@@ -75,9 +75,9 @@ function App() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200">
+      <footer className="bg-[#272b33] border-t border-gray-700">
         <div className="max-w-full mx-auto px-6 py-3">
-          <div className="flex items-center justify-between text-gray-500">
+          <div className="flex items-center justify-between text-gray-400">
             <div className="flex items-center gap-6 text-sm">
               <span className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>

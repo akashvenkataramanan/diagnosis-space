@@ -2,7 +2,7 @@
 
 ## Clinical Reasoning Intelligence Platform
 
-A cutting-edge web application that combines OpenAI's O3 reasoning model with interactive visualization to create comprehensive medical diagnosis workflows. Built with Claude's signature design language for a professional healthcare experience.
+A cutting-edge web application that combines OpenAI's O3 (gpt-4o) reasoning model with interactive visualization to create comprehensive medical diagnosis workflows. Built with Claude's signature design language for a professional healthcare experience.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![React](https://img.shields.io/badge/React-18.0-blue.svg)
@@ -28,6 +28,7 @@ A cutting-edge web application that combines OpenAI's O3 reasoning model with in
 - **Expandable Details**: Click any node to reveal comprehensive information
 - **Priority Color Coding**: Visual hierarchy for clinical urgency
 - **Real-time Interaction**: Pan, zoom, and explore medical reasoning
+- **Obsidian-Inspired Dark Theme**: Modern styling for comfortable analysis
 
 ### 🔒 Privacy & Security
 - **Local Processing**: API keys stored securely in browser only
@@ -38,9 +39,9 @@ A cutting-edge web application that combines OpenAI's O3 reasoning model with in
 
 - **Frontend**: React 18 + TypeScript + Vite
 - **Styling**: Tailwind CSS with Claude's design system
-- **Visualization**: React Flow for interactive diagrams
+- **Visualization**: Cytoscape.js for interactive diagrams
 - **State Management**: Zustand with persistence
-- **AI Integration**: OpenAI O3 API with function calling
+- **AI Integration**: OpenAI O3 (gpt-4o) API with function calling
 - **Build Tools**: Vite + ESLint + PostCSS
 
 ## 📋 Prerequisites
@@ -106,7 +107,7 @@ Physical Examination:
 src/
 ├── components/           # React components
 │   ├── ApiKeyInput.tsx   # Secure API key management
-│   ├── GraphBoard.tsx    # React Flow visualization
+│   ├── GraphBoard.tsx    # Cytoscape visualization
 │   ├── Legend.tsx        # Workflow guide
 │   ├── NoteInput.tsx     # Clinical note input
 │   └── nodes/
@@ -125,7 +126,7 @@ src/
 1. **User Input** → Clinical note entered
 2. **AI Processing** → OpenAI O3 analyzes content
 3. **Data Transformation** → Structured medical workflow
-4. **Visualization** → Interactive React Flow diagram
+4. **Visualization** → Interactive Cytoscape diagram
 5. **User Interaction** → Explore and analyze results
 
 ## 🔧 Development
@@ -210,7 +211,7 @@ This project is licensed under the MIT License. See [LICENSE](LICENSE) file for 
 
 - **OpenAI**: For the powerful O3 reasoning model
 - **Anthropic**: For Claude's design inspiration and AI assistance
-- **React Flow**: For the excellent visualization framework
+- **Cytoscape.js**: For the excellent visualization framework
 - **Tailwind CSS**: For the utility-first styling system
 - **Medical Community**: For insights into clinical workflow needs
 

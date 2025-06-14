@@ -39,9 +39,9 @@ Physical Examination:
       
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label 
-            htmlFor="clinical-note" 
-            className="block text-base font-medium text-gray-900 mb-2 flex items-center gap-2"
+          <label
+            htmlFor="clinical-note"
+            className="block text-base font-medium text-gray-200 mb-2 flex items-center gap-2"
           >
             <span className="text-lg">📝</span>
             Clinical Presentation
@@ -52,12 +52,12 @@ Physical Examination:
               value={localNote}
               onChange={(e) => setLocalNote(e.target.value)}
               placeholder="Describe the patient's presentation, history, physical exam findings, vital signs, and any relevant clinical context..."
-              className="w-full h-32 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 resize-none bg-white shadow-sm text-gray-900 placeholder-gray-500 transition-all duration-200"
+              className="w-full h-32 p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 resize-none bg-[#272b33] shadow-sm text-gray-100 placeholder-gray-400 transition-all duration-200"
               disabled={isLoading}
             />
             {isLoading && (
-              <div className="absolute inset-0 bg-white/80 rounded-lg flex items-center justify-center">
-                <div className="flex items-center gap-3 text-gray-700">
+              <div className="absolute inset-0 bg-[#272b33]/80 rounded-lg flex items-center justify-center">
+                <div className="flex items-center gap-3 text-gray-300">
                   <div className="animate-spin h-5 w-5 border-2 border-orange-500 border-t-transparent rounded-full"></div>
                   <span className="font-medium">AI analyzing clinical data...</span>
                 </div>
@@ -89,7 +89,7 @@ Physical Examination:
             type="button"
             onClick={loadSampleNote}
             disabled={isLoading}
-            className="px-4 py-2.5 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 disabled:bg-gray-50 disabled:cursor-not-allowed font-medium transition-all duration-200"
+            className="px-4 py-2.5 bg-gray-700 text-gray-100 rounded-lg hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed font-medium transition-all duration-200"
           >
             💼 Load Sample Case
           </button>
@@ -99,7 +99,7 @@ Physical Examination:
               type="button"
               onClick={() => setLocalNote('')}
               disabled={isLoading}
-              className="px-4 py-2.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 disabled:bg-gray-50 disabled:cursor-not-allowed font-medium transition-all duration-200"
+              className="px-4 py-2.5 bg-red-700 text-white rounded-lg hover:bg-red-600 disabled:bg-red-800 disabled:cursor-not-allowed font-medium transition-all duration-200"
             >
               🗑️ Clear
             </button>
@@ -107,22 +107,22 @@ Physical Examination:
         </div>
 
         {error && (
-          <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+          <div className="p-3 bg-red-800/20 border border-red-700 rounded-lg">
             <div className="flex items-center gap-2">
-              <span className="text-red-500 text-base">⚠️</span>
-              <p className="text-red-700 font-medium text-sm">{error}</p>
+              <span className="text-red-400 text-base">⚠️</span>
+              <p className="text-red-300 font-medium text-sm">{error}</p>
             </div>
           </div>
         )}
 
-        <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+        <div className="bg-[#242933] p-4 rounded-lg border border-gray-700">
           <div className="flex items-start gap-3">
             <span className="text-lg">✨</span>
             <div>
-              <p className="font-medium text-gray-900 mb-2">
+              <p className="font-medium text-gray-100 mb-2">
                 AI-Powered Clinical Reasoning Engine
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-600">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-400">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
                   <span>Primary & differential diagnoses</span>

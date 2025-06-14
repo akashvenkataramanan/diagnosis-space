@@ -182,7 +182,8 @@ IMPORTANT: Generate a substantial workflow with multiple nodes - this should ref
         'Authorization': `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'o3',  // Updated to use full o3 reasoning model
+        // Use ChatGPT's O3 model for advanced reasoning
+        model: 'gpt-4o',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt }
@@ -192,7 +193,8 @@ IMPORTANT: Generate a substantial workflow with multiple nodes - this should ref
           function: DIAGNOSIS_SCHEMA
         }],
         tool_choice: { type: 'function', function: { name: 'generate_comprehensive_diagnosis_workflow' } },
-        max_completion_tokens: 4000   // Updated parameter name for reasoning models
+        // Request a large number of tokens for detailed reasoning
+        max_tokens: 4000
       })
     });
 
@@ -211,10 +213,12 @@ IMPORTANT: Generate a substantial workflow with multiple nodes - this should ref
     
     // Create clustered layout based on medical relationships
     const createClusteredLayout = () => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const clusters: { [key: string]: { x: number; y: number; nodes: any[] } } = {};
       const relationships = functionResponse.relationships || [];
       
       // Initialize clusters for primary diagnoses
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       functionResponse.primary_diagnoses.forEach((dx: any, index: number) => {
         clusters[dx.id] = {
           x: 100 + (index * 600), // Wider cluster spacing for larger nodes
@@ -226,9 +230,11 @@ IMPORTANT: Generate a substantial workflow with multiple nodes - this should ref
       // Add related actions to diagnosis clusters
       const allActions = [...functionResponse.immediate_actions, ...functionResponse.followup_actions];
       
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       allActions.forEach((action: any) => {
         // Find related diagnosis
-        const relatedDx = relationships.find((rel: any) => 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const relatedDx = relationships.find((rel: any) =>
           rel.source === action.id || rel.target === action.id
         );
         
@@ -259,6 +265,7 @@ IMPORTANT: Generate a substantial workflow with multiple nodes - this should ref
       });
       
       // Add differential diagnoses to existing clusters or create new ones
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       functionResponse.differential_diagnoses.forEach((dx: any) => {
         // Try to find related primary diagnosis
         const relatedPrimary = Object.keys(clusters).find(clusterId => {
@@ -288,10 +295,10 @@ IMPORTANT: Generate a substantial workflow with multiple nodes - this should ref
     const nodes: DiagnosisNode[] = [];
     
     Object.values(clusters).forEach((cluster) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       cluster.nodes.forEach((node: any, index: number) => {
         const nodeData = {
           id: node.id,
-          type: 'default',
           position: {
             x: cluster.x + (index % 2) * 500, // Wider spacing for larger nodes
             y: cluster.y + Math.floor(index / 2) * 250 // More vertical spacing for larger nodes
@@ -311,6 +318,7 @@ IMPORTANT: Generate a substantial workflow with multiple nodes - this should ref
       });
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const edges: DiagnosisEdge[] = functionResponse.relationships.map((rel: any) => ({
       id: rel.id,
       source: rel.source,

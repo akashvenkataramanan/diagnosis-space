@@ -1,14 +1,17 @@
 import dagre from 'dagre';
-import type { Node, Edge } from '@xyflow/react';
+import type { DiagnosisNode, DiagnosisEdge } from '../types';
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-export const getLayoutedElements = (nodes: Node[], edges: Edge[], direction = 'LR') => {
+export const getLayoutedElements = (
+  nodes: DiagnosisNode[],
+  edges: DiagnosisEdge[],
+  direction = 'LR'
+) => {
   const nodeWidth = 200;
   const nodeHeight = 80;
 
-  const isHorizontal = direction === 'LR';
   dagreGraph.setGraph({ rankdir: direction });
 
   nodes.forEach((node) => {
@@ -25,8 +28,6 @@ export const getLayoutedElements = (nodes: Node[], edges: Edge[], direction = 'L
     const nodeWithPosition = dagreGraph.node(node.id);
     const newNode = {
       ...node,
-      targetPosition: isHorizontal ? 'left' : 'top',
-      sourcePosition: isHorizontal ? 'right' : 'bottom',
       position: {
         x: nodeWithPosition.x - nodeWidth / 2,
         y: nodeWithPosition.y - nodeHeight / 2,
